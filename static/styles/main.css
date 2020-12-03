@@ -1,0 +1,40 @@
+.wrapper {
+    width: 100%;
+    padding: 15px;
+}
+.header {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #673AB7;
+    border-radius: 5px;
+    color: white;
+    box-shadow: 0 4px 2px -2px gray;
+}
+.site-name a {
+    color: white;
+    text-decoration: none;
+}
+.site-name a:hover {
+    text-decoration: none;
+    color: white;
+}
+.header .site-name span {
+    color: #FF5722;
+}
+.site-name {
+    text-align: left;
+}
+
+form {
+    padding: 20px 0;
+}
+
+.card-grid {
+  display: grid;
+  grid-gap: 15px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}

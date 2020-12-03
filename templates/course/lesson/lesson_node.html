@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="container" style="margin-top: 10px">
+        <p>{{ node.text }}</p>
+
+        <div class="row">
+            <div class="col">
+                <div class="pictures w-50">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                      <div class="carousel-inner">
+                          {% for image in node.images.all%}
+                        <div class="carousel-item {% if forloop.first %} active {% endif %}">
+                          <img class="d-block w-100" src="{{ image.image.url }}" alt="">
+                            <div class="carousel-caption d-none d-md-block">
+                                <p>{{image.name}}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                      </div>
+                      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                      </a>
+                      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                      </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="margin: 10px 0">
+            <div class="col">
+               <div class="actions">
+                    {% if not node.is_first %}
+                        <a href="{% url 'course:lesson_node' pk=object.lesson_id node=node.get_previous_node.number %}" class="btn btn-primary">Previous</a>
+                    {% endif %}
+                    {% if node.is_last %}
+                        <a href="{% url 'course:lesson_finish' pk=object.lesson_id %}" class="btn btn-success">Finish</a>
+                    {% else %}
+                        <a href="{% url 'course:lesson_node' pk=object.lesson_id node=node.get_next_node.number %}" class="btn btn-success">Next</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

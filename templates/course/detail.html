@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container" style="margin-top: 50px">
+        <div class="row">
+            <div class="col-4">
+                <img src="{{ object.image.url }}" class="img-fluid" alt="Course image">
+            </div>
+            <div class="col-8">
+                <h3>{{ object.name }}</h3>
+                <p> {{ object.description }}</p>
+
+                <ul class="list-group" style="margin: 10px 0">
+                  <li class="list-group-item">Lessons: {{ course.lessons.count }}</li>
+                  <li class="list-group-item">Students: {{ course.user_set.count }}</li>
+                </ul>
+
+                {% if request.user.is_authenticated %}
+                    {% if object in request.user.courses.all %}
+                        <a class="btn btn-success" role="button" href="{% url 'course:lessons' pk=course.id %}">Go to lessons</a>
+                    {% else %}
+                        <a class="btn btn-success" role="button" href="{% url 'course:join' pk=course.id %}">Join course</a>
+                    {% endif %}
+                {% else %}
+                    If you wanna join to course, please
+                    <a class="btn btn-primary" href="{% url 'sign-in' %}">Sign in</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row" style="margin-top: 10px">
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-header">
+                        Tutor
+                    </div>
+                    {% if object.tutor.user.avatar %}
+                    <img class="card-img-top" src="{{object.tutor.user.avatar.url}}" alt="User photo">
+                    {% endif %}
+                    <div class="card-body">
+                        <p class="card-text">{{object.tutor.user.full_name}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

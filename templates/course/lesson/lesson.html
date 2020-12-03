@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h3>{{ object.lesson.name }}</h3>
+        <p>{{ object.lesson.description }}</p>
+        <a href="{% url 'course:lesson_node' pk=object.lesson_id node=object.lesson.get_first_node.number %}" class="btn btn-success">Start lesson</a>
+    </div>
+{% endblock %}
