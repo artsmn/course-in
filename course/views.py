@@ -21,7 +21,7 @@ class CourseLessonsView(DetailView):
         context = super(CourseLessonsView, self).get_context_data(**kwargs)
 
         context.update({
-            'lessons': self.request.user.lessons
+            'lessons': self.request.user.lessons.filter(lesson__course=self.get_object())
         })
         return context
 
