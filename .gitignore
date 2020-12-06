@@ -2,3 +2,4 @@ venv/
 __pycahe__/
 *.py[cod]
 .idea/
+media/

@@ -59,6 +59,10 @@ class LessonNodeView(DetailView):
         self.node_id = kwargs.pop('node')
         return super(LessonNodeView, self).get(request, *args, **kwargs)
 
+    def get_object(self, queryset=None):
+        pk = self.kwargs.get(self.pk_url_kwarg)
+        return self.model.objects.filter(lesson_id=pk, user=self.request.user)[0]
+
     def get_context_data(self, **kwargs):
         context = super(LessonNodeView, self).get_context_data(**kwargs)
         context.update({
